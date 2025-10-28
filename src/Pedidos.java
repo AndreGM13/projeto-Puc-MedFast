@@ -2,16 +2,26 @@ import java.io.Serializable;
 
 public class Pedidos implements Serializable {
     int quantidade;
-    String nome;
-    public Pedidos(String s, int qtd){
+    String remedio;
+    String nome_cliente;
+    public Pedidos(String s, int qtd , String n){
         quantidade = qtd;
-        nome = s;
+        remedio = s;
+        nome_cliente = n;
     }
 
-    public String getNome(){
-        return nome;
+    public String getRemedio(){
+        return remedio;
     }
     public int getQuantidade(){
         return quantidade;
+    }
+
+    public String getNomeCliente(){
+        return nome_cliente;
+    }
+
+    public void mostrar(){
+        System.out.println("\nCliente: " + nome_cliente + "\nRemédio: " + remedio + "\nQuantidade: "+ quantidade);
     }
 }

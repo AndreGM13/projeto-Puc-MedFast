@@ -32,10 +32,10 @@ public class Servidor {
                 if(!b){
                     break;
                 }
-                if (estoque.containsKey(pedido.getNome())) {
-                    if (estoque.get(pedido.getNome()) > pedido.getQuantidade()) {
-                        estoque.replace(pedido.getNome(), estoque.get(pedido.getNome()) - pedido.getQuantidade());
-                        System.out.println("pedido: " + pedido.getNome() + "\nquantidade: " + pedido.getQuantidade());
+                if (estoque.containsKey(pedido.getRemedio())) {
+                    if (estoque.get(pedido.getRemedio()) > pedido.getQuantidade()) {
+                        estoque.replace(pedido.getRemedio(), estoque.get(pedido.getRemedio()) - pedido.getQuantidade());
+                        pedido.mostrar();
                         System.out.println("estoque: " + estoque.toString());
                     }
                     c.retorno(client_socket, true);
@@ -66,5 +66,4 @@ public class Servidor {
         }
         return ret;
     }
-
 }
