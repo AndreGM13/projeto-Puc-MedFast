@@ -16,11 +16,13 @@ public class Cliente {
     }
     private static void menu(){
         int opc;
+
+        Scanner entrada = new Scanner(System.in);
         do{
-            Scanner entrada = new Scanner(System.in);
-            System.out.println("PUC - MedFast\n");
-            System.out.println("1- Cadastrar Usuário: \n");
-            System.out.println("2- Enviar Pedido: \n");
+            System.out.println();
+            System.out.println("PUC - MedFast");
+            System.out.println("1- Cadastrar Usuário: ");
+            System.out.println("2- Enviar Pedido: ");
             System.out.println("3- Sair");
 
             opc = entrada.nextInt();
@@ -37,14 +39,14 @@ public class Cliente {
                     System.out.println("opcao incorreta\n");
             }
         }while(opc != 3);
+
+        entrada.close();
     }
 
     private static void cadastro(){
         Scanner entrada = new Scanner(System.in);
-        System.out.println("\nInsira seu nome: ");
+        System.out.println("Insira seu nome: ");
         nomeCliente = entrada.nextLine();
-
-        entrada.nextLine();
     }
 
     private static void pedido(){
@@ -52,40 +54,31 @@ public class Cliente {
         Scanner entrada = new Scanner(System.in);
         Pedidos pedido;
         boolean sair = false;
+
+        System.out.println("insira o nome do remedio: ");
+        String nome = entrada.nextLine();
+
+        System.out.println("Insira a quantidade desejada: ");
+        int qtd = entrada.nextInt();
+
+        entrada.nextLine();
+
+        pedido = new Pedidos(nome, qtd, nomeCliente);
+
+        c.send(socket, pedido);
+
+        valor = c.recebeRetorno(socket);
+        if (!valor) {
+            System.out.println("nao existe esse remedio");
+        }
+    }
+    public static void main(String args[]) {
         new Cliente();
-        do {
-            System.out.println("insira o nome do remedio: ");
-            String nome = entrada.nextLine();
-
-            System.out.println("Insira a quantidade desejada: ");
-            int qtd = entrada.nextInt();
-
-            if(qtd == -1){
-                sair = true;
-                Servidor.b = false;
-                break;
-            }
-            entrada.nextLine();
-
-
-
-            pedido = new Pedidos(nome, qtd ,nomeCliente);
-
-            c.send(socket, pedido);
-
-            valor = c.recebeRetorno(socket);
-            if (!valor) {
-                System.out.println("nao existe esse remedio");
-            }
-        }while(!sair);
-        entrada.close();
+        menu();
         try {
             socket.close();                 // fase de desconexao
         } catch (IOException e) {
             System.err.println("Nao encerrou a conexao corretamente" + e.getMessage());
         }
-    }
-    public static void main(String args[]) {
-       menu();
     }
 }
