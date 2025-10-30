@@ -35,7 +35,7 @@ public class Servidor {
                 if (estoque.containsKey(pedido.getRemedio())) {
                     if (estoque.get(pedido.getRemedio()) > pedido.getQuantidade()) {
                         estoque.replace(pedido.getRemedio(), estoque.get(pedido.getRemedio()) - pedido.getQuantidade());
-                        pedido.mostrar();
+                        System.out.println(pedido);
                         System.out.println("estoque: " + estoque.toString());
                     }
                     c.retorno(client_socket, true);

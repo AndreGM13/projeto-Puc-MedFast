@@ -14,6 +14,7 @@ public class Cliente {
             System.err.println("Nao consegui resolver o host...");
         }
     }
+
     private static void menu(){
         int opc;
 
@@ -31,7 +32,10 @@ public class Cliente {
                     cadastro();
                     break;
                 case 2:
-                    pedido();
+                    if(nomeCliente != null){
+                        pedido();
+                    }
+                    System.out.println("nao ha nenhum cliente cadastrado\n");
                     break;
                 case 3:
                     break;
@@ -70,7 +74,10 @@ public class Cliente {
         valor = c.recebeRetorno(socket);
         if (!valor) {
             System.out.println("nao existe esse remedio");
+        }else{
+            System.out.println("Pedido enviado");
         }
+
     }
     public static void main(String args[]) {
         new Cliente();

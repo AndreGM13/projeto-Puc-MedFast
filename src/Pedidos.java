@@ -16,12 +16,12 @@ public class Pedidos implements Serializable {
     public int getQuantidade(){
         return quantidade;
     }
-
     public String getNomeCliente(){
         return nome_cliente;
     }
-
-    public void mostrar(){
-        System.out.println("\nCliente: " + nome_cliente + "\nRemédio: " + remedio + "\nQuantidade: "+ quantidade);
+    public String toString(){
+        return "\nCliente: " + nome_cliente + "\nRemédio: " + remedio + "\nQuantidade: "+ quantidade;
     }
+
+
 }
